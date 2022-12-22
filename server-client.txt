@@ -1,0 +1,8 @@
+res.json
+res.end
+res.render,
+res.sendFile,
+res.download,
+res.send,
+res.status,
+res.sendStatus
