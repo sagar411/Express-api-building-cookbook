@@ -9,6 +9,13 @@ const routers = require("./routes/index")
 
 app.use("/",routers);
 
+app.use((req,res,next)=>{
+    next({
+        status_code:404,
+        msg:"Resource not found"
+    })
+})
+
 // error handling middleware
 app.use((error,req,res,next)=>{
     let status = error.status_Code ||500;

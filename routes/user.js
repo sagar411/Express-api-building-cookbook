@@ -8,10 +8,18 @@ const loginCheck = require("../apps/middlewares/login.middleware");
 router.route("/")
     .get(loginCheck,(req,res,next)=>{
         res.json({
-            result:"hello from get user"
+            result:"UserList here!",
+            status:true,
+            msg:"all the users feached"
         })
     })
-    .post(loginCheck,(req,res,next)=>{})
+    .post(loginCheck,(req,res,next)=>{
+        res.json({
+            result:"post request useer",
+            status:true,
+            msg:"user register"
+        });
+    })
 
 
 
