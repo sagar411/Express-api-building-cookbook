@@ -8,6 +8,8 @@ const brand_routers = require("./brand");
 const category_routers = require("./category");
 const product_routers = require("./product");
 const order_routers =require("./order");
+const label_routers = require("./label");
+
 
 app.use("/", test_routes);
 
@@ -23,4 +25,5 @@ app.use("product",product_routers);
 
 app.use("orders",order_routers);
 
+app.use("label", label_routers);
 module.exports = app;
