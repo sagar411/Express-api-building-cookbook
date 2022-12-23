@@ -1,0 +1,25 @@
+we get from request 
+
+//form data
+session 
+cooie 
+file upload 
+headers
+data type
+url 
+methods
+
+we write api (Applicaion Programming Interface)=> end point 
+
+method: prtotcal://domain:port/param/subparam?query=value& query1
+
+
+rest =>representational state transfer
+
+
+CRUD
+
+Create =>POST
+Read => get
+update => put/patch
+delete => delete

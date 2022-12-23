@@ -1,24 +1,26 @@
 const express = require("express");
-
 const app = express();
 
 
-const isLoggedIn = (req,res,next)=>{
-    let a= req.params.id;
-    if(a==1){
-        next();
-    }else{
-        res.json({
-            result:"sorry"
-        })
-    }
-}
+// const isLoggedIn = (req,res,next)=>{
+//     let a= req.params.id;
+//     if(a==1){
+//         next();
+//     }else{
+//         res.json({
+//             result:"sorry"
+//         })
+//     }
+// }
+app.get("/",(req,res,next)=>{
+    res.json("hello")
+})
 
-app.get("/:id",isLoggedIn, (req,res,next)=>{
-    res.json({
-        result:"hello world"
-    })
-});
+// app.get("/:id",isLoggedIn, (req,res,next)=>{
+//     res.json({
+//         result:"hello world"
+//     })
+// });
 
 app.get("/product/:slug",(req,res)=>{
     let slug = req.params.slug;
