@@ -1,0 +1,12 @@
+buildin middleware
+//for raw-jason formate
+// app.use(
+//     express.json()
+// );
+
+// //for x-www-form-unlencoded
+
+// app.use(express.urlencoded({
+//     extended:true
+// }
+// ))

@@ -1,0 +1,5 @@
+param:req.params,
+query:req.query,
+body:req.body,
+file:req.files
+

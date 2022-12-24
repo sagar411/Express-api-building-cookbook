@@ -1,6 +1,6 @@
 const express = require("express");
 const app = express();
-const test_routes = require("./test");
+
 const user_routers =require("./user");
 
 const slider_routers = require("./slider");
@@ -11,7 +11,6 @@ const order_routers =require("./order");
 const label_routers = require("./label");
 
 
-app.use("/", test_routes);
 
 app.use("/user",user_routers);
 
@@ -26,4 +25,5 @@ app.use("product",product_routers);
 app.use("orders",order_routers);
 
 app.use("label", label_routers);
+
 module.exports = app;

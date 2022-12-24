@@ -6,6 +6,18 @@ const app = express();
 const routers = require("./routes/index")
 //http://localhost:3005 => get
 
+//data-parsing--->builtin middleware
+//for raw-jason formate
+app.use(
+    express.json()
+);
+
+//for x-www-form-unlencoded
+
+app.use(express.urlencoded({
+    extended:true
+}
+))
 
 app.use("/",routers);
 

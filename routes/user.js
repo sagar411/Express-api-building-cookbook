@@ -4,29 +4,22 @@
 const express = require("express");
 const router = express.Router();
 const loginCheck = require("../apps/middlewares/login.middleware");
+const UserController = require("../apps/Controllers/user.controller");
+
+const user_ctrl = new UserController();
 
 router.route("/")
-    .get(loginCheck,(req,res,next)=>{
-        res.json({
-            result:"UserList here!",
-            status:true,
-            msg:"all the users feached"
-        })
-    })
-    .post(loginCheck,(req,res,next)=>{
-        res.json({
-            result:"post request useer",
-            status:true,
-            msg:"user register"
-        });
-    })
+    .get(loginCheck,user_ctrl.listAllUser)
+    .post(loginCheck,user_ctrl.userRegister);
+
+
 
 
 
 router.route("/:id")
-    .get((req,res,next)=>{})
-    .put((req,res,next)=>{})
-    .delete((req,res,next)=>{})
+    .get(user_ctrl.getUserId)
+    .put(user_ctrl.updateUserById)
+    .delete(user_ctrl.deleteUserById)
     .all((req,res,next)=>{})
 
 
