@@ -31,11 +31,12 @@ app.use((req,res,next)=>{
 // error handling middleware
 app.use((error,req,res,next)=>{
     let status = error.status_Code ||500;
-    let msg = error.msg || JSON.stringfy(error);
+    let msg = error.msg || JSON.stringify(error);
 
     res.status(status).json({
+        
         result:null,
-        msg:error.msg +"from error handling middleware",
+        msg:msg ,
         status:false
     })
 })

@@ -1,6 +1,28 @@
+const UserService = require("../services/user.service");
+
 class UserController{
+    user_service;
+    constructor(){
+        this.user_service = new UserService();
+
+    }
+
     userRegister =(req,res,next)=>{
-        let data= req.body;
+        // user validation
+
+        //400 =>bad request,
+        //422 => unprocessable entity
+      let data = req.body;
+        let error_msg = this.user_service.validateRegister(data);
+
+        if(error_msg){
+            next({
+                status_Code:400,
+                msg:(error_msg)
+            })
+        }else {
+
+        console.log("here we are")
         res.json({
             result:{
                 param:req.params,
@@ -11,6 +33,7 @@ class UserController{
             status:true,
             msg:"user register"
         });
+    }
     }
 
     listAllUser = (req,res,next)=>{
