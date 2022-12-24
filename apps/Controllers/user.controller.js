@@ -15,14 +15,14 @@ class UserController{
       let data = req.body;
         let error_msg = this.user_service.validateRegister(data);
 
-        if(error_msg){
+        if(Object.keys(error_msg).length>0){
             next({
                 status_Code:400,
-                msg:(error_msg)
+                msg:error_msg
             })
         }else {
 
-        console.log("here we are")
+        console.log("here we are");
         res.json({
             result:{
                 param:req.params,
