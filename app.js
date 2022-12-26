@@ -3,7 +3,21 @@ const express = require("express");
 const app = express();
 
 
-const routers = require("./routes/index")
+const routers = require("./routes/index");
+const events = require("events");
+
+const myEvents = new events.EventEmitter();
+app.use((req,res,next)=>{
+    req.myEvents = myEvents;
+    next();
+})
+
+myEvents.on("register", (data)=>{
+    console.log(data)
+    console.log("i am in hello")
+});
+
+myEvents.emit("hello",{data:"hello data"})
 //http://localhost:3005 => get
 
 //data-parsing--->builtin middleware
@@ -26,7 +40,8 @@ app.use((req,res,next)=>{
         status_code:404,
         msg:"Resource not found"
     })
-})
+});
+
 
 
 

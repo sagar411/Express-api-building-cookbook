@@ -19,16 +19,14 @@ class UserController{
         if(req.file){
             data['image']= req.file.filename;
             
-        }
-        
+        };
         if(Object.keys(error_msg).length>0){
             next({
                 status_Code:400,
                 msg:error_msg
             })
         }else {
-
-        console.log("here we are");
+            req.myEvents.emit("register",{data:data})
         res.json({
             result:{
                 param:req.params,
