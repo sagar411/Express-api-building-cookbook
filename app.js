@@ -1,27 +1,16 @@
 
 const express = require("express");
 const app = express();
-
+const events =require("./apps/events/event")
 
 const routers = require("./routes/index");
-const events = require("events");
 
-const myEvents = new events.EventEmitter();
-app.use((req,res,next)=>{
-    req.myEvents = myEvents;
-    next();
-})
-
-myEvents.on("register", (data)=>{
-    console.log(data)
-    console.log("i am in hello")
-});
-
-myEvents.emit("hello",{data:"hello data"})
 //http://localhost:3005 => get
 
 //data-parsing--->builtin middleware
 //for raw-jason formate
+
+app.use(events)
 app.use(
     express.json()
 );
