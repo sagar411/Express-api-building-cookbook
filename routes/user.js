@@ -5,16 +5,12 @@ const express = require("express");
 const router = express.Router();
 const loginCheck = require("../apps/middlewares/login.middleware");
 const UserController = require("../apps/Controllers/user.controller");
-
+const uploader = require("../apps/middlewares/uploader.middleware")
 const user_ctrl = new UserController();
 
 router.route("/")
     .get(loginCheck,user_ctrl.listAllUser)
-    .post(loginCheck,user_ctrl.userRegister);
-
-
-
-
+    .post(loginCheck,uploader.single("image"),user_ctrl.userRegister);
 
 router.route("/:id")
     .get(user_ctrl.getUserId)

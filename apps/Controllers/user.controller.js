@@ -14,7 +14,13 @@ class UserController{
         //422 => unprocessable entity
       let data = req.body;
         let error_msg = this.user_service.validateRegister(data);
+        let file = req.file;
 
+        if(req.file){
+            data['image']= req.file.filename;
+            
+        }
+        
         if(Object.keys(error_msg).length>0){
             next({
                 status_Code:400,
