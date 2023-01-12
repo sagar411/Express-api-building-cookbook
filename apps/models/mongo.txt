@@ -1,0 +1,46 @@
+// run mongo 
+1. mongo 
+// to list all the database in db'
+2.show dbs;
+
+// to create data base 
+3. use  db_ name;
+
+if - db_name doesn't exis it will create new database 
+else - it will use new database 
+
+4. to view current db;
+
+db;
+
+
+//to insert 
+
+5. db.user.insert();
+
+# to create a data with table
+
+6.db.table_name.insert ({})
+
+7. db.table_name.insertMany([{}])
+
+
+example
+
+db.users.insert ({
+    name:"sagar sunar",
+    class:142
+})
+
+8. list of table listing
+show tables;
+
+9. to fetch data.. 
+
+db.users.find();
+
+10. db.user.find().pretty();
+
+ "_id" : ObjectId("63bffbcdf2b50d29e6cec888"), 
+ note: id is always in Object and  it's value is in hexa-decimal 
+ 
