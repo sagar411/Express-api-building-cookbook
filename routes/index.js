@@ -10,10 +10,11 @@ const product_routers = require("./product");
 const order_routers =require("./order");
 const label_routers = require("./label");
 
+const auth_routes= require("./auth");
 
 
 app.use("/user",user_routers);
-
+app.use("/auth",auth_routes);
 app.use("/slider",slider_routers);
 
 app.use("/brand",brand_routers);

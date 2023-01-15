@@ -27,7 +27,7 @@ app.use("/",routers);
 app.use((req,res,next)=>{
     next({
         status_code:404,
-        msg:"Resource not found"
+        msg:" not found resources"
     })
 });
 
@@ -38,9 +38,8 @@ app.use((req,res,next)=>{
 app.use((error,req,res,next)=>{
     let status = error.status_Code ||500;
     let msg = error.msg || JSON.stringify(error);
-
+    console.log(msg)
     res.status(status).json({
-        
         result:null,
         msg:msg ,
         status:false

@@ -32,6 +32,25 @@ db.users.insert ({
     class:142
 })
 
+  db.users.insertMany([
+    {
+        name:"Ajay Bashyal",
+        class:12
+    },
+    {
+        name:"bijay Bashyal",
+        class:12
+    },
+    {
+        name:"Sanjay Bashyal",
+        class:12
+    },
+    {
+        name:" Sagar Adhakari",
+        class:12
+    }
+]);
+
 8. list of table listing
 show tables;
 
@@ -43,4 +62,21 @@ db.users.find();
 
  "_id" : ObjectId("63bffbcdf2b50d29e6cec888"), 
  note: id is always in Object and  it's value is in hexa-decimal 
- 
+
+
+ 11. find({})
+        i. filter \
+        db.users.find({
+            class"12
+        }).pretty();
+
+        ii. second parameter - projection
+        just name 
+
+        db.find({class:12},{id:0k,name:1, class:0});
+
+        12. update
+        db.user.update({_id: ObjectId(""), {$set: {role:"customer "}}, {upsert: true}});
+
+        db.users.deleteOne({_id":   ObjectiD("")})
+note: we can do project using any 

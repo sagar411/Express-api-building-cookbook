@@ -1,0 +1,7 @@
+To perform CRUD operation we need to do following thing
+1. install mongodb in project
+2.DATA pREPARE
+3.Server Connection
+3.DATA execute=>Crud
+4.aknowledgement
+5.Response
