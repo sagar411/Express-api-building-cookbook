@@ -1,0 +1,28 @@
+ MongoClient.connect(DB_URL)
+            .then((client)=>{
+                const db = client.db(DB_NAME);
+                db.collection("users").findOne({
+                    email: data.username,
+                    password:data.password
+                })
+                .then((user)=>{
+                    console.log(user);
+                    res.json({
+                        result:user,
+                        status:true,
+                        msg:"user Feached"
+                    })
+                })
+                .catch((err)=>{
+                    next({
+                        status_Code:400,
+                        msg:err
+                    })
+                })
+            })
+            .catch((err)=>{
+                next({
+                    status_Code:500,
+                    msg:err
+                })
+            })

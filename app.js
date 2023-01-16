@@ -38,7 +38,7 @@ app.use((req,res,next)=>{
 app.use((error,req,res,next)=>{
     let status = error.status_Code ||500;
     let msg = error.msg || JSON.stringify(error);
-    console.log(msg)
+    console.log(error)
     res.status(status).json({
         result:null,
         msg:msg ,

@@ -1,3 +1,4 @@
+const {insertData} = require("./mongodb.service")
 class UserService{
     validateRegister =(data)=>{
         let error_msg ={};
@@ -21,6 +22,15 @@ class UserService{
         }
         return error_msg;
     
+    }
+
+    userRegister = async(data)=>{
+       try{
+        let response = insertData("users",data);
+        return response;
+       }catch(err){
+        throw err;
+       }
     }
 }
 module.exports = UserService;

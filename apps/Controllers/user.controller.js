@@ -1,16 +1,13 @@
 
 const e = require("express");
-const {MongoClient} = require("mongodb");
-
-const dbUrl = "mongodb://localhost:27017";
-const dbName = "MERN-STACK-LEARNING";
-
-
 const UserService = require("../services/user.service");
+const AuthService =  require("../services/auth.service");
 class UserController{
     user_service;
+    auth_service;
     constructor(){
         this.user_service = new UserService();
+        this.auth_service = new  AuthService();
 
     }
 
@@ -19,50 +16,33 @@ class UserController{
 
         //400 =>bad request,
         //422 => unprocessable entity
-
-        
       let data = req.body; 
         let error_msg = this.user_service.validateRegister(data);
         let file = req.file;
 
         if(req.file){
             data['image']= req.file.filename;
-            
         };
+
         if(Object.keys(error_msg).length>0){
             next({
                 status_Code:400,
                 msg:error_msg
             })
         }else {
-          MongoClient.connect(dbUrl, (err,client)=>{
-            if(err){
-                next({status_Code:500, msg:err})
-            }else{
-                const db = client.db(dbName);
-                db.collection("users").insertOne(data)
-                .then((ack)=>{
-                    console.log(ack);
-                    res.json({
-                        result:data
-                            // param:req.params,
-                            // query:req.query,
-                            // body:req.body,
-                            // file:req.files
-                        ,
-                        status:true,
-                        msg:"user register"
-                    });
-                    
+            
+            this.user_service.userRegister(data)
+            .then((response)=>{
+
+                res.json({
+                    result:response,
+                    status:true,
+                    msg:"User Register"
                 })
-                .catch((err)=>{
-                    next({
-                        status_Code:500,
-                        msg:err
-                    })
-                })
-            }
-          })
+            })
+            .catch((err)=>{
+                next({status_Code:500,msg:err})
+            })
             // MongoClient.connect(dbUrl,(err,client)=>{
             //     if(err){
             //         next({
@@ -122,7 +102,7 @@ class UserController{
     }
 
     userLogin=(req,res,next)=>{
-        console.log("hello userlogin")
+        
         //login
         let data = req.body;
         console.log(data)
@@ -132,34 +112,21 @@ class UserController{
                 msg:"credential required"
             })
         }else{
-            MongoClient.connect(dbUrl)
-            .then((client)=>{
-                const db = client.db(dbName);
-                db.collection("users").findOne({
-                    email: data.username,
-                    password:data.password
-                })
-                .then((user)=>{
-                    console.log(user);
-                    res.json({
-                        result:user,
-                        status:true,
-                        msg:"user Feached"
-                    })
-                })
-                .catch((err)=>{
-                    next({
-                        status_Code:400,
-                        msg:err
-                    })
+            this.auth_service.loginService(data.username,data.password)
+            .then((user)=>{
+                res.json({
+                    result:user,
+                    status:true,
+                    msg:"User Logged In"
                 })
             })
             .catch((err)=>{
                 next({
                     status_Code:500,
-                    msg:err
+                    msg:msg
                 })
             })
+
         }
     }
 }
