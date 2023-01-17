@@ -1,3 +1,4 @@
+const UserModel = require("../models/user.model");
 const {insertData} = require("./mongodb.service")
 class UserService{
     validateRegister =(data)=>{
@@ -26,8 +27,10 @@ class UserService{
 
     userRegister = async(data)=>{
        try{
-        let response = insertData("users",data);
-        return response;
+            let user = new UserModel(data);
+            return user.save();
+        // let response = insertData("users",data);
+        // return response;
        }catch(err){
         throw err;
        }

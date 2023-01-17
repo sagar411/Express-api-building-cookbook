@@ -29,6 +29,7 @@ class UserController{
                 status_Code:400,
                 msg:error_msg
             })
+            
         }else {
             
             this.user_service.userRegister(data)

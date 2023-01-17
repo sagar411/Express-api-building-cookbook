@@ -4,7 +4,7 @@ const app = express();
 const events =require("./apps/events/event")
 
 const routers = require("./routes/index");
-
+require("./config/mongoose.config")
 //http://localhost:3005 => get
 
 //data-parsing--->builtin middleware
@@ -21,7 +21,7 @@ app.use(express.urlencoded({
     extended:true
 }
 ))
-
+ 
 app.use("/",routers);
 
 app.use((req,res,next)=>{
