@@ -1,5 +1,6 @@
 const UserModel = require("../models/user.model");
-const {insertData} = require("./mongodb.service")
+const bcrypt = require("bcrypt");
+
 class UserService{
     validateRegister =(data)=>{
         let error_msg ={};
@@ -27,6 +28,9 @@ class UserService{
 
     userRegister = async(data)=>{
        try{
+
+            data['password']=bcrypt.hashSync(data["password"],10);
+
             let user = new UserModel(data);
             return user.save();
         // let response = insertData("users",data);

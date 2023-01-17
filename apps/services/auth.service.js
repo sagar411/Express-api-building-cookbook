@@ -1,6 +1,7 @@
 const UserController = require("../Controllers/user.controller");
 const UserModel = require("../models/user.model");
-const {dbService} = require("../services/mongodb.service");
+const bcrypt = require("bcrypt");
+
 class AuthService{
     loginService= async(username,password)=>{
         try{
@@ -11,7 +12,9 @@ class AuthService{
             if(!user){
                 throw{status:400, msg:"user does not already exist"}
             }else{
-                if(user.password===password){
+
+                if(bcrypt.compareSync(password, user.password)){
+                    //token
                     return user;
                 }else{
                     throw{ status:400,msg:"Credential doesnot match"}
@@ -22,7 +25,7 @@ class AuthService{
 
 
         }catch(error){
-            throw{status:400,msg:error}
+            throw{status:400,msg:error.msg}
         }
         
 

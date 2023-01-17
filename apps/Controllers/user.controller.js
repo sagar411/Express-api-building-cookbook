@@ -31,7 +31,6 @@ class UserController{
             })
             
         }else {
-            
             this.user_service.userRegister(data)
             .then((response)=>{
 
@@ -42,7 +41,7 @@ class UserController{
                 })
             })
             .catch((err)=>{
-                next({status_Code:500,msg:err})
+                next({status_Code:400,msg:err})
             })
             // MongoClient.connect(dbUrl,(err,client)=>{
             //     if(err){
@@ -106,7 +105,6 @@ class UserController{
         
         //login
         let data = req.body;
-        console.log(data)
         if(!data.username|| !data.password){
             next({
                 status_Code:400,
@@ -124,7 +122,7 @@ class UserController{
             .catch((err)=>{
                 next({
                     status_Code:500,
-                    msg:msg
+                    msg:err.msg
                 })
             })
 
