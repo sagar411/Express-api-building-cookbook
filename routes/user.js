@@ -10,7 +10,7 @@ const user_ctrl = new UserController();
 
 router.route("/")
     .get(loginCheck,user_ctrl.listAllUser)
-    .post(loginCheck,uploader.single("image"),user_ctrl.userRegister);
+    .post(uploader.single("image"),user_ctrl.userRegister);
 
 router.route("/:id")
     .get(user_ctrl.getUserId)

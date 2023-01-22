@@ -10,7 +10,7 @@ const myStorage = multer.diskStorage({
         cb(null,f_name);
     }
 
-});
+}); 
 
 const imageFilter =(req,file,cb)=>{
     let allowed = ["jpg","jpeg", "png","webp","svg","bmp","gif"];

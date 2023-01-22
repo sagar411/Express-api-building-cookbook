@@ -19,12 +19,12 @@ app.use("/slider",slider_routers);
 
 app.use("/brand",brand_routers);
 
-app.use("category", category_routers);
+app.use("/category", category_routers);
 
-app.use("product",product_routers);
+app.use("/product",product_routers);
 
-app.use("orders",order_routers);
+app.use("/orders",order_routers);
 
-app.use("label", label_routers);
+app.use("/label", label_routers);
 
 module.exports = app;

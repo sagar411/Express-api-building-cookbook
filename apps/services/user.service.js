@@ -26,6 +26,14 @@ class UserService{
     
     }
 
+    getUserById = (user_id)=>{
+        try{
+            return UserModel.findById(user_id);
+        }catch(error){
+            throw error;
+        }
+    }
+
     userRegister = async(data)=>{
        try{
 

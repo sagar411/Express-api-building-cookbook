@@ -118,6 +118,7 @@ class UserController{
                     status:true,
                     msg:"User Logged In"
                 })
+                
             })
             .catch((err)=>{
                 next({
