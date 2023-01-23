@@ -2,7 +2,7 @@ const LabelModel = require("../models/label..model");
 
 class LabelService {
     validateLable =(data,file)=>{
-        console.log("inside validataion");
+        
         let err = {
             title:"",
             image:"",
@@ -20,8 +20,8 @@ class LabelService {
         }else{
             delete err.type;
         }
-
-        if(!file){
+        
+        if(!file?.image){
             err.image = "image is required"
         }else{
             delete err.image;
@@ -34,6 +34,21 @@ class LabelService {
         let label = new LabelModel(data);
         return label.save();
 
+    }
+
+    getLables=async()=>{
+        let all_labels = await LabelModel.find();
+        return all_labels;
+    }
+    labelUpdated= (data,id)=>{
+        return LabelModel.findByIdAndUpdate(id,{
+            $set:data
+        })
+        
+        
+    }
+    deleteById =async (id)=>{
+        return LabelModel.findByIdAndDelete(id);
     }
 }
 module.exports = LabelService;

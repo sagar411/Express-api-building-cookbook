@@ -9,7 +9,6 @@ const myStorage = multer.diskStorage({
         let f_name =Date.now()+ "-"+file.originalname;
         cb(null,f_name);
     }
-
 }); 
 
 const imageFilter =(req,file,cb)=>{
