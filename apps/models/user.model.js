@@ -40,7 +40,7 @@ const   UserSchemaDef = new mongoose.Schema({
 },{
     timestamps:true,
     autoCreate:true,
-    autoIndex:true
+    autoIndex:true,
 });
 
 const UserModel = mongoose.model("User", UserSchemaDef);

@@ -108,8 +108,6 @@ class CategoryController {
         try{
             let data =req.body;
             // console.log("data is",data);
-
-            console.log(req.body)
             let error = this.cat_svc.validateCategoryData(req.body);
             
             if(error){
@@ -126,6 +124,8 @@ class CategoryController {
                 if(!data.parent || data.parent == "null"){
                     data.parent = null;
                 }
+
+              
                 console.log("slug is", data.slug)
 
                 
@@ -143,7 +143,7 @@ class CategoryController {
                 }else{
                     next({
                         statu_code:400,
-                        msg:"sorry there was problem in update cate"
+                        msg:"sorry there was problem in update"
                     })
                 }
 

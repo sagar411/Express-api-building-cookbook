@@ -7,8 +7,8 @@ const ProductController = require("../apps/Controllers/product.controller")
 const product_ctrl = new ProductController();
 
 routers.route("/")
-    .get((req,res,next)=>{})
-    .post(loginCheck,isAdminSeller, uploader.array("image"), product_ctrl.addProduct);
+    .get(product_ctrl.getAllProduct)
+    .post(loginCheck,isAdminSeller, uploader.array("images"), product_ctrl.addProduct);
 routers.route("/:id")
     .put((req,res,next)=>{})
     .patch((req,res,next)=>{})
