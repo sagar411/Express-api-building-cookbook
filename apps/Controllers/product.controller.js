@@ -2,25 +2,47 @@ const { default: slugify } = require("slugify");
 const ProductModel = require("../models/product.model");
 const ProductService = require("../services/product.service");
 const product_svc = new ProductService();
+
+async function uniqueSlug(slug){
+  let new_slug = slug;
+  let product = await ProductModel.findOne({
+    slug:slug
+  });
+
+  if(product){
+ new_slug= Date.now()+ "-"+ product.slug;
+    return new_slug;
+}else{
+  return new_slug;
+}
+}
 class ProductController {
-    uniqueSlug= async(slug)=>{
-        try{
-       let result= await  ProductModel.findOne({
-            slug:slug
-        })
+    // uniqueSlug= async(slug)=>{
+    //     try{
+    //    let result= await  ProductModel.findOne({
+    //         slug:slug
+    //     })
 
-        if(result){
-             slug = Date.now()+"-"+slug;
-             throw slug;
+    //     if(result){
+    //       console.log("result: slug",result.slug);    
+    //       console.log("get slog", slug);      
+    //          slug = Date.now()+"-"+slug;
 
-        }else{
-            return slug;
-        }
-    }catch(new_slug){
-        this.uniqueSlug(new_slug);
-    }
+    //         console.log(slug)
+            
+    //          throw slug;
+
+    //     }else{
+    //         return slug;
+            
+    //     }  
+    // }catch(new_slug){
+    //   console.log("new slug", new_slug)
+      
+    //  this.uniqueSlug(new_slug);
+    // }
         
-    }
+    // }
 
   addProduct = async(req, res, next) => {
     try {
@@ -38,7 +60,7 @@ class ProductController {
             replacement:"-"
         })
 
-        let new_slug = await this.uniqueSlug(slug);
+        let new_slug = await uniqueSlug(slug);
         data.slug = new_slug;
 
         data.after_discount = data.price -data.discount *data.discount /100;
