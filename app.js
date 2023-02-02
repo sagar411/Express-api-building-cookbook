@@ -1,7 +1,10 @@
 
 const express = require("express");
 const app = express();
-const events =require("./apps/events/event")
+const events =require("./apps/events/event");
+const cors = require("cors");
+
+app.use(cors());
 
 const routers = require("./routes/index");
 require("./config/mongoose.config")

@@ -10,7 +10,7 @@ routers.route("/")
     .get(product_ctrl.getAllProduct)
     .post(loginCheck,isAdminSeller, uploader.array("images"), product_ctrl.addProduct);
 routers.route("/:id")
-    .put((req,res,next)=>{})
+    .put(loginCheck,isAdminSeller, uploader.array("images"), product_ctrl.updateProduct)
     .patch((req,res,next)=>{})
     .delete((req,res,next)=>{})
 

@@ -1,3 +1,4 @@
+const { replaceOne } = require("../models/product.model");
 const ProductModel = require("../models/product.model");
 class ProductService {
     validateProductData = (data)=>{
@@ -66,10 +67,20 @@ class ProductService {
 
     }
 
-    updateCategory =(data,id)=>{
-           return CategoryModel.findByIdAndUpdate(id,{
-                $set:data
-            })
+    updateProduct =(data,id)=>{
+        
+           return ProductModel.updateOne({
+            _id:id
+           },{
+            $set:data
+           })
+           .then((response)=>{
+            console.log(response);
+           })
+           .catch((err)=>{
+            console.log(err)
+           })
+           
     }
 
 

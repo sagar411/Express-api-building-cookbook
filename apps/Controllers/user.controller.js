@@ -10,7 +10,13 @@ class UserController{
         this.auth_service = new  AuthService();
 
     }
-
+    myProfile=(req,res,next)=>{
+        res.json({
+            result:req.auth_user,
+            status:true,
+            msg:"your profile"
+        })
+    }
     userRegister =(req,res,next)=>{
         // user validation
 

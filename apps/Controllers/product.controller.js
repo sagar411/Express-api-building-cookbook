@@ -125,6 +125,67 @@ class ProductController {
     }
 
   }
+
+  updateProduct=async(req,res,next)=>{
+    try {
+      let data = req.body;
+      console.log(req.params.id)
+
+      let validation = product_svc.validateProductData(data);
+
+      if(validation){
+        throw validation;
+      }else{
+        
+
+        data.after_discount = data.price -data.discount *data.discount /100;
+        
+        if(!data.brand|| data.brand ==="null"){
+            data.brand = null;
+        }
+
+        if(!data.seller){
+          data.seller =null;
+        }
+// we need to change file accordint to front end
+        if(req.files){
+            let images =[];
+            req.files.map((image)=>{
+                images.push(image.filename);
+            })
+            data.images=  images;
+        }
+
+    let response = product_svc.updateProduct(data,req.params.id);
+        if(response){
+          // console.log(response)
+          
+          res.json({
+            result:data,
+            status:true,
+            msg:"Product Updatted Succesfully"
+          })
+        }else{
+          console.log("problem with updating product")
+          next({
+            
+            status_code: 400,
+            msg: "problem while Updateing problem",error,
+          });
+        }
+
+
+      }
+      
+    } catch (error) {
+      console.log("error from product add : ", error);
+      next({
+        status_code: 400,
+        msg: error,
+      });
+    }
+
+  }
 }
 
 module.exports = ProductController;
