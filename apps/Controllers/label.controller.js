@@ -9,7 +9,6 @@ class LabelController {
         let data = req.body;
         let file = req.file;
         let validation = lbl_srvc.validateLable(data,file);
-
         // let validation = lbl_srvc.validateLable(req.body, req.file);
         
 
@@ -21,7 +20,7 @@ class LabelController {
         } else {
             try {
                 data.image = req.file.filename;
-
+                
                 let success = await lbl_srvc.labelCreate(data);
                 res.json({
                     result: data,
@@ -45,7 +44,14 @@ class LabelController {
 
     getAllLabels = async (req, res, next) => {
         try {
-            let data = await lbl_srvc.getLables();
+            let filters = {};
+
+            if(req.query.type){
+                filters = {
+                    type:req.query.type
+                }
+            }
+            let data = await lbl_srvc.getLables(filters);
             res.json({
                 result: data,
                 status: true,

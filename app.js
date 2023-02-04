@@ -12,11 +12,12 @@ require("./config/mongoose.config")
 
 //data-parsing--->builtin middleware
 //for raw-jason formate
-
+app.use("/assets", express.static(process.cwd()+"/uploads"));
 app.use(events)
 app.use(
     express.json()
 );
+
 
 //for x-www-form-unlencoded
 

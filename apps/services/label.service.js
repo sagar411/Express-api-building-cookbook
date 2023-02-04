@@ -21,7 +21,7 @@ class LabelService {
             delete err.type;
         }
         
-        if(!file?.image){
+        if(!file){
             err.image = "image is required"
         }else{
             delete err.image;
@@ -36,8 +36,8 @@ class LabelService {
 
     }
 
-    getLables=async()=>{
-        let all_labels = await LabelModel.find();
+    getLables=async(filters)=>{
+        let all_labels = await LabelModel.find(filters);
         return all_labels;
     }
     labelUpdated= (data,id)=>{
